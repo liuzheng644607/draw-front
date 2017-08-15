@@ -3,7 +3,7 @@
  * @Date:   2017-08-15T17:03:05+08:00
  * @Email:  liu-yaner@foxmail.com
  * @Last modified by:   liuyan
- * @Last modified time: 2017-08-15T18:49:18+08:00
+ * @Last modified time: 2017-08-15T21:41:10+08:00
  */
 
 class Pen {
@@ -33,7 +33,9 @@ class Pen {
             width: getRandomInt(3, 5)
         });
 
-        for (var i = 1; i < points.length; i++) {
+        this.points = points = points.slice(-100);
+
+        for (var i = 1, len = points.length; i < len; i++) {
             ctx.beginPath();
             ctx.moveTo(points[i - 1].x, points[i - 1].y);
             ctx.setLineWidth(points[i].width);

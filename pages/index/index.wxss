@@ -2,12 +2,15 @@
     flex-direction: row;
     display: flex;
 }
-page {
-    background: #efefef;
-}
+
 .icon-btn {
-    width: 44px;
-    height: 44px;
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    margin: 0 5px;
     border-radius: 50%;
-    background-color: #000000
+}
+.eraser {
+    width: 27px;
+    height: 27px;
 }

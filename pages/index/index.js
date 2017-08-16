@@ -11,8 +11,8 @@ Page({
     },
 
     initCanvas: function() {
-        var ctx = this.canvasCtx = wx.createCanvasContext('my-canvas');
-        ctx.setStrokeStyle("#000000");
+        var ctx = (this.canvasCtx = wx.createCanvasContext('my-canvas'));
+        ctx.setStrokeStyle('#000000');
         ctx.setLineCap('round');
         ctx.setLineWidth(4);
 
@@ -30,6 +30,37 @@ Page({
 
     onTouchEnd: function(e) {
         pen.end(e);
+
+        var self = this;
+        self.drawHistory = this.drawHistory || [];
+        wx.canvasToTempFilePath({
+            canvasId: 'my-canvas',
+            success: function(res) {
+                self.drawHistory.push(res.tempFilePath);
+            }
+        });
+    },
+
+    revoke: function() {
+        this.drawHistory.pop();
+        console.log(this.drawHistory);
+        console.log(this.canvasCtx);
+        var lastIndex = this.drawHistory.length - 1
+        var path = this.drawHistory[lastIndex];
+        if (path) {
+            this.canvasCtx.drawImage(path);
+        } else {
+            this.canvasCtx.clearRect(0, 0, this.data.sysInfo.windowWidth, this.data.sysInfo.windowWidth);
+        }
+        this.canvasCtx.draw();
+    },
+
+    /**
+     * 使用橡皮擦
+     * @return {[type]} [description]
+     */
+    useEraser: function() {
+        this.canvasCtx.setStrokeStyle('#ffffff');
     },
 
     initApp: function() {
@@ -49,6 +80,7 @@ Page({
                 userInfo: userInfo
             });
         });
+        this.drawHistory = []
     },
 
     onReady: function() {

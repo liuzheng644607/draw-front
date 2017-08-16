@@ -1,6 +1,7 @@
 var BaseBrush = require('./brushes/pointBase');
 var Base = require('./brushes/base');
 var Pen = require('./brushes/pen');
+var Brush = require('./brushes/brush');
 
 var brushes;
 
@@ -14,7 +15,8 @@ module.exports = {
         brushes = {
             pointBased: new BaseBrush(ctx),
             base: new Base(ctx),
-            pen: new Pen(ctx)
+            pen: new Pen(ctx),
+            brush: new Brush(ctx)
         };
 
         this.ready = true;

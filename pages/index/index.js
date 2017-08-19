@@ -45,12 +45,17 @@ Page({
         this.drawHistory.pop();
         console.log(this.drawHistory);
         console.log(this.canvasCtx);
-        var lastIndex = this.drawHistory.length - 1
+        var lastIndex = this.drawHistory.length - 1;
         var path = this.drawHistory[lastIndex];
         if (path) {
             this.canvasCtx.drawImage(path);
         } else {
-            this.canvasCtx.clearRect(0, 0, this.data.sysInfo.windowWidth, this.data.sysInfo.windowWidth);
+            this.canvasCtx.clearRect(
+                0,
+                0,
+                this.data.sysInfo.windowWidth,
+                this.data.sysInfo.windowWidth
+            );
         }
         this.canvasCtx.draw();
     },
